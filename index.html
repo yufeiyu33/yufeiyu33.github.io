@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>鱼非愚 - 这是一个写的不快的博客</title><meta name="author" content="鱼非愚"><meta name="copyright" content="鱼非愚"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="慢慢写">
+<meta property="og:type" content="website">
+<meta property="og:title" content="鱼非愚">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="鱼非愚">
+<meta property="og:description" content="慢慢写">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.postimg.cc/kGHRZvgj/4k.jpg">
+<meta property="article:author" content="鱼非愚">
+<meta property="article:tag" content="问题在这">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/kGHRZvgj/4k.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"IFZTL6MGHC","apiKey":"8686cdc3fd8aa064b111245d76ee04a062","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '鱼非愚',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-09-22 14:56:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.postimg.cc/kGHRZvgj/4k.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/./img/%E7%BB%98%E6%A2%A8%E8%A1%A31.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="鱼非愚"><span class="site-name">鱼非愚</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">鱼非愚</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://yufeiyu33.github.io/yufeiyu" target="_blank" title="网址"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yfyzyyj@outlook.com" target="_blank" title="邮件"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://yufeiyu33.github.io" target="_blank" title="博客"><i class="fas fa-solid fa-ghost"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/09/13/UAF%E6%BC%8F%E6%B4%9E%EF%BC%88%E6%96%B0%E6%89%8B%E5%90%91%EF%BC%89/" title="UAF漏洞（hitcontraining_uaf）">UAF漏洞（hitcontraining_uaf）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-13T13:44:39.000Z" title="发表于 2024-09-13 21:44:39">2024-09-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/">pwn-学习</a></span></div><div class="content">知识点学到这里感觉学的很乱，感觉什么都要去了解，但是什么都不是很了解，可能学到后面的点把这些知识点串起来就好了吧。
+UAFuse after free顾名思义就是在这个chunk被free后面进行利用
+当一个chunk被free后，这个函数内部的数据不会马上清除，这些数据会被保留在原来的位置，然后这个chunk会被标记为free后，并且会根据chunk的大小被分到不同的bin中去，有（fastbin,unsorted bin,large bin….）这些bin就是以链表的形势把这些free后chunk链在一起
+例题下面以buu上面的hitcontraining_uaf进行说明
+这个题目应该在glibc2.23环境中运行，但是这个题目大部分环境都可以打，就没改了
+检查保护
+
+ida打开
+
+函数运行的时候会进行菜单选择
+
+这里的delete函数中
+这里可以看到free掉函数后面没有把函数的指针置零
+因此这里存在漏洞
+同时这个题目存在后门函数
+
+先申请两个堆块
+
+
+这个时候再free掉
+
+
+free后面的bin
+
+这个时候我们add（0x10，magic_addr）
+
+因为在printf函数 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/09/08/%E6%A0%88%E8%BF%81%E7%A7%BB/" title="栈迁移（详解）">栈迁移（详解）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-08T11:27:38.000Z" title="发表于 2024-09-08 19:27:38">2024-09-08</time></span></div><div class="content">栈迁移原理
+栈迁移主要利用了leave_ret这个指令
+
+
+
+
+leave
+返回上级函数时，恢复原本的栈空间
+leave
+mov esp,ebp                                                                                                               pop ebp
+
+
+
+ret
+返回上级函数后，执行上级函数的命令
+ret
+等同于                                              pop eip                                               (不存在这样的指令
+
+
+1234esp&#x27;&#x27;&#x27;ebpret
+
+在函数的先执行到leave指令时，会将ebp处填充的地址pop到ebp中去，这样栈基地址发生了变化，在下次的栈位置就会发生变化
+
+有个图对这些指令变化阐述的比较清楚
+来自栈迁移的原理&amp;&amp;实战运用 - ZikH26 - 博客园 (cnblogs.co ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E6%AF%94%E8%B5%9Bpwn%E5%A4%8D%E7%8E%B0/" title="羊城杯比赛pwn复现">羊城杯比赛pwn复现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-05T12:12:19.000Z" title="发表于 2024-09-05 20:12:19">2024-09-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf-%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/">ctf-比赛复现</a></span></div><div class="content">首先推荐这个博客
+本篇学习的思路来自这个大佬
+实力有限，只复现出了pstack这一题
+pstack
+
+知识点这个题目是个很经典的栈迁移的题目，因为栈溢出的空间不够，但是常规的栈迁移一般有方法获得一个地址来进行leave_ret 
+这个题目有个很妙的点
+这里call 完read后面有一个leave_ret(平时没注意过)
+本题的核心就在于对这里进行反复利用
+题解由于leave_ret这个指令
+两次这样就可以控制rbp 和rsp
+这里重点讲下调用vuln_read这个函数后面的过程
+这里我们动态调试
+123456789101112131415161718192021222324252627from pwn import *from LibcSearcher import *context(log_level=&#x27;debug&#x27;)p=process(&#x27;./pwn&#x27;)elf=ELF(&#x27;./pwn&#x27;)libc=ELF(&#x27;./libc.so.6&#x27;)bss=elf.bss()+0x500leave_ret=0x4006dbr ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/18/off-by-one/" title="off-by-one">off-by-one</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-18T15:03:51.000Z" title="发表于 2024-08-18 23:03:51">2024-08-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/">pwn-学习</a></span></div><div class="content">知识点通过堆块的错位来改变下个堆块的size位置，从可以改写指定的位置的函数
+题目npuctf_2020_easyheap参考
+
+64位 可以改写plt表 
+
+点开就是菜单
+
+这个存在溢出漏洞
+解法先创造两个chunk
+
+通过改写chunk0（第一个）溢出通过溢出多一个字节（0x41）使得下面两个堆块整合到一起
+
+
+接着free chunk1(第二个chunk)
+
+再重新申请一个大小为0x38的块
+可以看到之前的0x41申请回来了
+这个发的是’a‘
+利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化
+这里把那个地址改成了free函数
+泄露libc通过题目里面的show函数泄露free处的libc
+就是这个堆块的返回地址已经变成你指定的位置了，无论是输出还是改写就容易了
+
+最后找到system 将free函数改成system加上前面写入的&#x2F;bin&#x2F;sh\x00EXP123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/29/%E6%AD%A6%E5%8A%9F%E5%B1%B1%E6%9D%AFpwn%E5%A4%8D%E7%8E%B0/" title="武功山杯pwn复现">武功山杯pwn复现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-28T16:09:59.000Z" title="发表于 2024-07-29 00:09:59">2024-07-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf-%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/">ctf-比赛复现</a></span></div><div class="content">穿云入雾这题nc连接后输入WuGongShan_i_Come
+安源路矿
+canary保护和NX保护
+
+
+利用上面这个函数溢出一个泄露canary 还可以泄露在这里的rbp
+
+
+这里泄露出来了
+关键然后当我想正常走ret2libc的流程的时候发现在连接后会出现超时的情况
+这个时候，在高人指点下（赛后）发现可以利用一种类似于栈迁移的方法，就是利用上面泄露的rbp将函数puts完后回到puts这里，puts出puts的got表，之后在进行one_gadget(ret2libc超时)
+但是要注意这里的rbp有变化
+
+read到puts rbp-0x50
+最后exp如下
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465from pwn import *from LibcSearcher import *context(log_level=&#x27;debug&#x27;)libc=ELF(&#x27;. ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/28/DASCTF-2024%E6%9A%91%E6%9C%9F%E6%8C%91%E6%88%98%E8%B5%9B/" title="DASCTF 2024暑期挑战赛">DASCTF 2024暑期挑战赛</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-28T14:02:01.000Z" title="发表于 2024-07-28 22:02:01">2024-07-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf-%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/">ctf-比赛复现</a></span></div><div class="content">springboard本地环境调试之前一直不理解为什么有的题目会给几个文件，现在才知道可以用来方便协调本地和远程的环境的
+
+这里需要使用patchelf这个工具
+修改ld
+1patchelf --set-interpreter ./ld.so ./pwn(路径和文件)
+
+ld.so 是要修改的 .&#x2F;pwn是本地文件名
+修改libc
+1patchelf --replace-needed libc.so.6 ./libc.so.6 ./pwn
+
+
+解题思路检查
+
+
+可以看出非栈上格式化字符串漏洞
+来到printf函数
+
+可以看到
+1处可以泄露libc 同时也是返回地址的所在地
+两个2处可以利用这样的链式关系修改任意位置的地址
+具体的手搓格式化字符串点这里格式化字符串 | 鱼非愚 (yufeiyu33.github.io)
+exp123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566from  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/15/ZJCTF-2019-Login%E9%A2%98%E8%A7%A3/" title="[ZJCTF 2019]Login题解">[ZJCTF 2019]Login题解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-15T02:09:24.000Z" title="发表于 2024-07-15 10:09:24">2024-07-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a></span></div><div class="content">这个题目主要考察了函数间的参数的的具体分析
+
+先检查保护，有canary保护
+在ida中静态分析一下
+
+有个账号密码的输入和检查，漏洞一般就是在账号密码输入的地方
+先运行看看什么情况
+
+
+发现只要输入对了密码，就会出现这样的异常，在ida查看这个异常的函数
+
+发现只要输入对了密码就会跳转到上面的函数
+所以要来找找a1的来源
+
+rax就是a1 
+也就是外面的&amp;v7
+
+点开
+
+发现v7是rbp+var_18
+rbp&#x3D;rsp
+在下面输入函数中
+
+
+同样rbp&#x3D;rsp
+这两个函数见rsp的值是没有发生变化的
+故可在密码处通过覆盖得到改变a1
+
+计算偏移即可
+0x60-0xf(2jctf_pa5sw0rd)-0x18&#x3D;58
+后面就是a1覆盖上bookdoor
+exp1234567891011121314151617from pwn import *#p=process(&#x27;./pwn&#x27;)p=remote(&#x27;node5.buuoj.cn&#x27;,29903)elf=ELF(&#x27;./pwn&#x27;)bookdoor=0 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/ret2dlresolve%E5%8F%8A%E4%BE%8B%E9%A2%98/" title="ret2dlresolve及例题">ret2dlresolve及例题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T11:45:13.000Z" title="发表于 2024-06-21 19:45:13">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/">pwn-学习</a></span></div><div class="content">ret2dlresolveret2dlresolve主要是利用函数进行plt表进行动态链接的时候，通过一系列的跳转才能找到got表，就是利用的这个过程进行漏洞攻击
+_dl_runtime_resolve函数调用参考：[原创]ROP高级用法之ret2_dl_runtime_resolve-二进制漏洞-看雪-安全社区|安全招聘|kanxue.com
+
+
+首先用link_map访问.dynamic，分别取出.dynstr、 .dynsym、 .rel.plt的地址
+.dynamic的地址加0x44的位置是.dynstr.dynamic的地址加0x4c的位置是.dynsym.dynamic的地址加0x84的位置是.rel.plt
+.rel.plt + 参数reloc_index,求出当前函数的重定位表项Elf32_Rel的指针，记作rel
+rel-&gt;r_info &gt;&gt; 8作为.dynsym的下标，求出当前函数的符号表项Elf32_Sym的指针，记作sym
+.dynstr + sym-&gt;st_name得出符号名字符串指针
+在动态链接库查找这个函数的地址，并且把地址赋值给* ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/18/pwn%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/" title="pwn漏洞修复">pwn漏洞修复</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-18T13:34:46.000Z" title="发表于 2024-06-18 21:34:46">2024-06-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/">pwn-学习</a></span></div><div class="content">pwn patch栈read 32
+在push 18h处右击 点击Assemble 将18h改成正常的无溢出的长度就好了
+read 6464位的也是同理
+找到溢出的函数将长度改合理
+格式化字符串32法一 ：若有puts的plt把printf改成puts即可
+法二：需要改一个函数无用的函数改成write函数
+ 12345678910.text:080485C0 win             proc near.text:080485C0 ; __unwind &#123;.text:080485C0                 push    20h ; &#x27; &#x27;       ; n.text:080485C2                 push    eax             ; buf.text:080485C3                 push    1               ; fd.text:080485C5                 call    _write.text:080485CA                 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/12/reverse-%E5%A3%B3%E4%B8%8E%E8%84%B1%E5%A3%B3/" title="reverse-壳与脱壳">reverse-壳与脱壳</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-12T14:42:28.000Z" title="发表于 2024-06-12 22:42:28">2024-06-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse-%E5%AD%A6%E4%B9%A0/">reverse-学习</a></span></div><div class="content">壳壳分为两类
+压缩壳：
+
+UPX  ASPack  PECompact  RLPack NSPack
+
+保护壳、
+
+ASProtect  Armadillo EXECryptor Themida
+
+手动脱壳参考这篇【BUUCTF】 reverse 新年快乐_buuctf 文件加壳和脱壳-CSDN博客
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.postimg.cc/kGHRZvgj/4k.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">鱼非愚</div><div class="author-info__description">慢慢写</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://yufeiyu33.github.io/yufeiyu" target="_blank" title="网址"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yfyzyyj@outlook.com" target="_blank" title="邮件"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://yufeiyu33.github.io" target="_blank" title="博客"><i class="fas fa-solid fa-ghost"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/13/UAF%E6%BC%8F%E6%B4%9E%EF%BC%88%E6%96%B0%E6%89%8B%E5%90%91%EF%BC%89/" title="UAF漏洞（hitcontraining_uaf）">UAF漏洞（hitcontraining_uaf）</a><time datetime="2024-09-13T13:44:39.000Z" title="发表于 2024-09-13 21:44:39">2024-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/08/%E6%A0%88%E8%BF%81%E7%A7%BB/" title="栈迁移（详解）">栈迁移（详解）</a><time datetime="2024-09-08T11:27:38.000Z" title="发表于 2024-09-08 19:27:38">2024-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E6%AF%94%E8%B5%9Bpwn%E5%A4%8D%E7%8E%B0/" title="羊城杯比赛pwn复现">羊城杯比赛pwn复现</a><time datetime="2024-09-05T12:12:19.000Z" title="发表于 2024-09-05 20:12:19">2024-09-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/18/off-by-one/" title="off-by-one">off-by-one</a><time datetime="2024-08-18T15:03:51.000Z" title="发表于 2024-08-18 23:03:51">2024-08-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/29/%E6%AD%A6%E5%8A%9F%E5%B1%B1%E6%9D%AFpwn%E5%A4%8D%E7%8E%B0/" title="武功山杯pwn复现">武功山杯pwn复现</a><time datetime="2024-07-28T16:09:59.000Z" title="发表于 2024-07-29 00:09:59">2024-07-29</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LitCTF-2024/"><span class="card-category-list-name">LitCTF 2024</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf-%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/"><span class="card-category-list-name">ctf-比赛复现</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">pwn-学习</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/reverse-%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">reverse-学习</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">总结</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"><span class="card-category-list-name">深入理解计算机系统</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/"><span class="card-category-list-name">题解</span><span class="card-category-list-count">6</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/1/" style="font-size: 1.1em; color: #999">1</a> <a href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.3em; color: #99a1ac">格式化字符串</a> <a href="/tags/%E4%B9%A6/" style="font-size: 1.5em; color: #99a9bf">书</a> <a href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 1.1em; color: #999">pwn-知识点</a> <a href="/tags/reverse/" style="font-size: 1.1em; color: #999">reverse</a> <a href="/tags/pwn-%E5%A0%86/" style="font-size: 1.1em; color: #999">pwn-堆</a> <a href="/tags/srop/" style="font-size: 1.1em; color: #999">srop</a> <a href="/tags/ret2text/" style="font-size: 1.3em; color: #99a1ac">ret2text</a> <a href="/tags/123/" style="font-size: 1.1em; color: #999">123</a> <a href="/tags/ret2libc/" style="font-size: 1.3em; color: #99a1ac">ret2libc</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.3em; color: #99a1ac">题解</a> <a href="/tags/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93/" style="font-size: 1.1em; color: #999">每周总结</a> <a href="/tags/pwn/" style="font-size: 1.1em; color: #999">pwn</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">10</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">36</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-09-22T06:56:28.135Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 鱼非愚</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  getScript('https://yijuzhan.com/api/word.php?m=js').then(() => {
+    const con = str[0]
+    if (true) {
+      const from = '出自 ' + str[1]
+      const sub = ["在哪里跌倒就在哪睡一觉","Never put off till tomorrow what you can do today"]
+      sub.unshift(con, from)
+      typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = con
+    }
+  })
+}
+typedJSFn.run(subtitleType)
+</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

